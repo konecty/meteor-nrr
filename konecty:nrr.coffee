@@ -1,6 +1,7 @@
 if Package.templating?
 	Template = Package.templating.Template
 	Blaze = Package.blaze.Blaze
+	HTML = Package.htmljs.HTML
 
 	Blaze.toHTMLWithDataNonReactive = (content, data) ->
 		makeCursorReactive = (obj) ->
@@ -25,9 +26,25 @@ if Package.templating?
 
 		return html
 
+	Blaze.registerHelper 'nrrargs', ->
+		obj = {}
+		obj._arguments = arguments
+		return obj
+
 	Blaze.renderNonReactive = (templateName, data) ->
-		return Blaze.toHTMLWithDataNonReactive Template[templateName], data
+		_arguments = this.parentView.dataVar.get()._arguments
 
-	Blaze.registerHelper 'nonReactiveRender', Blaze.renderNonReactive
+		templateName = _arguments[0]
+		data = _arguments[1]
 
-	Blaze.registerHelper 'nrr', Blaze.renderNonReactive
+		view = undefined
+		Tracker.nonreactive ->
+			view = new Blaze.View 'nrr', ->
+				return HTML.Raw Blaze.toHTMLWithDataNonReactive Template[templateName], data
+
+			view.onViewReady ->
+				Template[templateName].onViewReady?.call view
+
+		return view
+
+	Blaze.registerHelper 'nrr', Blaze.Template('nrr', Blaze.renderNonReactive)
