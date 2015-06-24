@@ -1,7 +1,7 @@
 Package.describe({
   name: 'konecty:nrr',
   summary: 'Non-Reactive render',
-  version: '1.0.0',
+  version: '2.0.0',
   git: 'https://github.com/Konecty/meteor-nrr'
 });
 
