@@ -9,14 +9,14 @@ This is ideal to improve the render of a high amount of data.
 
 # Use
 ```handlebars
-	{{nrr 'templateName' dataContext}}
+{{nrr 'templateName' dataContext}}
 ```
 or
 ```handlebars
-	{{nrr 'templateName' data1=data1 data2=data2}}
+{{nrr 'templateName' data1=data1 data2=data2}}
 ```
 
 # Example
 ```handlebars
-	{{nrr 'message' message}}
+{{nrr 'message' message}}
 ```
