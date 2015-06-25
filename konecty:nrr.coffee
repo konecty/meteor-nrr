@@ -45,6 +45,9 @@ if Package.templating?
 			view.onViewReady ->
 				Template[templateName].onViewReady?.call view, data
 
+			view._onViewRendered ->
+				Template[templateName].onViewRendered?.call view, data
+
 		return view
 
 	Blaze.registerHelper 'nrr', Blaze.Template('nrr', Blaze.renderNonReactive)
