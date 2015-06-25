@@ -43,7 +43,7 @@ if Package.templating?
 				return HTML.Raw Blaze.toHTMLWithDataNonReactive Template[templateName], data
 
 			view.onViewReady ->
-				Template[templateName].onViewReady?.call view
+				Template[templateName].onViewReady?.call view, data
 
 		return view
 
